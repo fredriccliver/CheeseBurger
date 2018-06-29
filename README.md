@@ -1,5 +1,5 @@
 # CheeseBurger Machine Learning Library
-Jun, 2018
+28 Jun, 2018
 
 
 - Regression 은 추후 구현.
