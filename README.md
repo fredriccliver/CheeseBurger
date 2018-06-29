@@ -11,8 +11,9 @@ data/train-sep-for-test.csv
     테스트용 142개 row
 
 
-## exercise.py
-    파이썬 연습용 파일
+## ./exercise
+    개발과정 중에 만든 파이썬 문법 및 라이브러리 연습용 파일을 모아둡니다.
+    
 
 <pre><code>
     
