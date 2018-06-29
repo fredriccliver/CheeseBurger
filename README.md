@@ -11,9 +11,9 @@ data/train-sep-for-test.csv
     테스트용 142개 row
 
 
-exercise.py
+## exercise.py
     파이썬 연습용 파일
 
 <pre><code>
-    fsjdjfiodjsoifj
+    
 </code></pre>
