@@ -117,7 +117,12 @@ class Appetizer:
             return data
 
 
+'''
+Countinuous 한 featue는 
+쉽게 leveling 이 가능하지만 Categorycal 한 data 는 불가능.
 
+> Clustering 으로 leveling을 할 수 있을 듯.
+'''
 class Cluster:
     def initialize(self):
         return
