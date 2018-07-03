@@ -1,8 +1,15 @@
+# import sys
+# sys.path.insert(0, "../lib")
+
 import pandas as pd
 import numpy
 import scipy.stats
+# import CheeseBurger.
+import lib.CheeseBurger as cb
 
-train = pd.read_csv("./data/train.csv", index_col='PassengerId')
+
+
+train = pd.read_csv("../data/train.csv", index_col='PassengerId')
 feature_arr = train.ix[:, "Pclass"]
 
 train['FamilySize'] = train['SibSp'] + train['Parch']
@@ -10,12 +17,17 @@ train['FamilySize'] = train['SibSp'] + train['Parch']
 # string 으로 읽고 싶다면 str() 말고 .astype() 을 사용해야 함.
 #train['SexAndPclass'] = train['Sex'] + str(train['Pclass'])
 train['SexAndPclass'] = train['Sex'] + train['Pclass'].astype("str")
-train['GenerationsBy10'] = numpy.ceil(train['Age']/10)
-train['GenerationsBy20'] = numpy.ceil(train['Age']/20)
-train['GenerationsBy50'] = numpy.ceil(train['Age']/50)
-#train['GenerationsBy150'] = numpy.ceil(train['Age']/150)
+train['GenerationsBy10'] = numpy.floor(train['Age']/10)
+train['GenerationsBy20'] = numpy.floor(train['Age']/20)
+train['GenerationsBy50'] = numpy.floor(train['Age']/50)
+#train['GenerationsBy150'] = numpy.floor(train['Age']/150)
 
-print(train.head())
+print(
+    train.ix[
+        0:30,
+        ['Age', 'GenerationsBy10', 'GenerationsBy20','GenerationsBy50']
+    ]
+)
 #print(train.ix[0:10,"AgeClass"])
 # print(feature_arr.head())
 
@@ -111,3 +123,6 @@ printFeatureWeight("GenerationsBy50")
 print(len(train.groupby("GenerationsBy10")))
 print(len(train.groupby("GenerationsBy20")))
 print(len(train.groupby("GenerationsBy50")))
+
+
+
