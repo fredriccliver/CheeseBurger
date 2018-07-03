@@ -42,10 +42,7 @@
 > 
 > 학습용 749개 row
 
-<<<<<<< HEAD
-```
-code expression
-```
+
 
 Categorical 한 data 는 scailing 불가, leveling 도 불가.
 numerical 한 featrue 는 1~10, 10~20 등으로 묶을 수 있지만, 
@@ -53,7 +50,8 @@ categorical 한 data 는 불가능.
 하지만, clustering 으로는 categorical 한 data를 묶을 수 있지 않겠나?
 
 []clustering 부분 개발.
-=======
+
+
 > **data/train-sep-for-test.csv**
 > 
 > 테스트용 142개 row
@@ -117,4 +115,3 @@ probabiliityArray = [
 
 # Probability of Class2 is 44%.
 ```
->>>>>>> ce8f2a7bc22b17542a08f6af1579fb2491e27892
