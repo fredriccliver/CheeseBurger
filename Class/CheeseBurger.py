@@ -1,11 +1,28 @@
 # Custom Machine Learing Class.
 # 2018.06.27
 
+
+
 import numpy as np
 
 
 
 class Classifier:
+
+    fwVector = [ 1,2,3 ]
+
+    burgerMatrix = [
+        [],[],[]
+    ]
+
+    recipe = [
+        [],[],[]
+    ]
+
+    # x : row x feature matrix
+    # t : row x label matrix
+    def fit(x, y):
+        return
     
         
     def predictClass(self, arr):
@@ -17,16 +34,8 @@ class Classifier:
             return "Class 2" 
         else:
             return "Class 3"
+    return
     
-    fwVector = [ ,,, ]
-
-    burgerMatrix = [
-        [],[],[], ...
-    ]
-
-    recipe = [
-        [],[],[],...
-    ]
     
     # data frame 을 받아서 모델을 생성.
     # 모델의 구체적인 형태는? data frame? matrix?
@@ -79,10 +88,12 @@ class Appetizer:
     ]
 
     # Store min, max value for every features before scailing.
-    scalingMetaData = [
-        [min, max]
-        [min, max]
-    ]
+    # scalingMetaData = [
+    #     [min, max]
+    #     [min, max]
+    # ]
+    # scailing need no more.
+    # scailing can adjust to countinuous feature only.
 
     # if want to know original value diversity of 'feature_A', code is below
     # scalingMetaDate[featureDictionary.getIdx("feature_A")]
@@ -107,5 +118,9 @@ class Appetizer:
         current_level = len(set(data))
         if(current_level <= level):
             return data
+
         
 
+class Cluster:
+    def init:
+        return
