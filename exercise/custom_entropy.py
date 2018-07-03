@@ -73,3 +73,10 @@ TypeError: can't multiply sequence by non-int of type 'float'
 
 # nan 값이 있는 row 도 drop 하지 않고, 값이 없음 역시 값으로 다루면 좋을 듯.
 
+
+
+grouped = train.groupby('Pclass').aggregate(np.sum)
+grouped = train.groupby('Pclass').aggregate(np.count_nonzero)
+
+print(grouped.iloc[:10,:6].describe)
+
