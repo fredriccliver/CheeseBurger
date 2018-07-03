@@ -21,7 +21,7 @@ class Classifier:
 
     # x : row x feature matrix
     # t : row x label matrix
-    def fit(x, y):
+    def fit(self, x, y):
         return
     
         
@@ -34,7 +34,7 @@ class Classifier:
             return "Class 2" 
         else:
             return "Class 3"
-    return
+        
     
     
     # data frame 을 받아서 모델을 생성.
@@ -56,35 +56,35 @@ class Classifier:
 
     # 행렬을 받아서 그 행렬에 모델을 적용하고, 정답 배열을 return.
     # return 되는 것도 행렬. [index, class] 로 return.
-    def predict(disp={"class", "class-prob", "probabilities"}):
+    def predict(self, disp={"class", "class-prob", "probabilities"}):
 
-        pointArray = numpy.matmul(fwVector,burgerMatrix)
+        pointArray = np.matmul(self.fwVector,self.burgerMatrix)
         # result = [ ,,, ] elements count : counts of classes. 
         
         probabiliityArray = [
-            pointArray[0] / numpy.sum(pointArray),
-            pointArray[1] / numpy.sum(pointArray),
-            pointArray[2] / numpy.sum(pointArray),
+            pointArray[0] / np.sum(pointArray),
+            pointArray[1] / np.sum(pointArray),
+            pointArray[2] / np.sum(pointArray),
             ...
         ]
 
         # bestProb = [ className, Probability ]
-        bestProb = [ ,, ]
+        bestProb = [ 1,2,3]
 
-        if disp=="class":           return bestProb[0]
-        elif disp=="class-prob":    return bestProb
-        elif disp=="probabilities"  return probabiliityArray
-        else                        return
+        if disp=="class":               return bestProb[0]
+        elif disp=="class-prob":        return bestProb
+        elif disp=="probabilities":     return probabiliityArray
+        else:                           return
 
         
 
 class Appetizer:
 
     featureDictionary = [
-        0: "First feature name",
-        1: "Secont feature name",
-        2: "Third feature name",
-        ...
+        [0, "First feature name"],
+        [1, "Secont feature name"],
+        [2, "Third feature name"]
+        
     ]
 
     # Store min, max value for every features before scailing.
@@ -101,18 +101,21 @@ class Appetizer:
 
     levelingDictionary = []
 
-    def scaling:
+    def scaling(self):
+        return
     
-    def fill:
+    def fill(self):
+        return
 
-    def simpleReady:
-        fill()
-        scaling()
-        leveling()
+    # def simpleReady(self):
+    #     fill(self)
+    #     scaling(self)
+    #     leveling(self)
+    #     return True
     
     # Leveling should apply to continuous values.
     # need developing other leveling algorithm for Discontinuous(Categorical) value.
-    def leveling(data=[], level = 10):
+    def leveling(self, data=[], level = 10):
         
         # check if need leveling.
         current_level = len(set(data))
@@ -122,5 +125,5 @@ class Appetizer:
         
 
 class Cluster:
-    def init:
+    def initialize(self):
         return
