@@ -115,3 +115,56 @@ probabiliityArray = [
 
 # Probability of Class2 is 44%.
 ```
+
+
+## feature 별 가중치 계산법
+> 데이터를 분산도를 측정.
+> entropy 계산 공식 별도로 제작함.
+```
+    def entropy(self, selected_col: pandas.DataFrame):
+        counts_list = selected_col.groupby(list(selected_col)[0]).size()
+        arr = list(counts_list)
+
+        ent = 0
+        for val in arr:
+            ent += (val / sum(arr)) ** 2
+        
+        return ent
+```
+
+나이분포가
+10대 : 10명, 20대 : 20명, 30대 : 30명 일때.
+
+entropy = ( (10/60)^2 + (20/60)^2 + (30/60)^2 ) * 3
+
+```python
+entropy([0,0,0,0,0,0,0,0,100,0,0,0,])
+# 12.0
+
+entropy([0,0,0,0,0,0,0,0,1,0,0,0,])
+# 12.0
+
+entropy([1,1,1,1,1,1,1,1,1,1,1,1001,1,1,1,1,1,1,1,1,])
+# 19.26
+
+entropy([1,1,1,1,1,1,1,1,1,1,1,1001,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+# 48.70
+
+
+# 아래 조건을 만족해야 함.
+# condition : 데이터 갯수와 데이터 값 자체의 높고 낮음은 영향을 주지 않아야 한다.
+only1 = [1,1,1,1]
+only10 = [10,10,10,10,10,10,10,10]
+# entropy = 1.0
+
+# below should have same entropy.
+original = [1, 2, 1, 1, 0, 1]
+double_original = [1, 2, 1, 1, 0, 1, 1, 2, 1, 1, 0, 1]
+# entropy = 1.33
+
+# below should have same entropy.
+left_side = [10,10,10,1,1,1,1,1,1,1,1,1,1]
+center_side = [1,1,1,1,1,10,10,10,1,1,1,1,1]
+# entropy = 2.5187
+
+```
