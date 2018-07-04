@@ -133,10 +133,16 @@ print("----------")
 # > list(df)[0] : first column's name
 
 
-print(cb.Appetizer.entropy(cb, train[['Pclass']]))              # 0.40
-print(cb.Appetizer.entropy(cb, train[['Sex']]))                 # 0.54
-print(cb.Appetizer.entropy(cb, train[['SexAndPclass']]))        # 0.22
-print(cb.Appetizer.entropy(cb, train[['Age']]))                 # 0.02
+print(cb.Appetizer.entropy(cb, train[['Pclass']]))              # 1.21
+print(cb.Appetizer.entropy(cb, train[['Sex']]))                 # 1.08
+print(cb.Appetizer.entropy(cb, train[['SexAndPclass']]))        # 1.37
+print(cb.Appetizer.entropy(cb, train[['Age']]))                 # 1.93
+print(cb.Appetizer.entropy(cb, train[['Fare']]))                # 3.63
+print(cb.Appetizer.entropy(cb, train[['SibSp']]))               # 3.65
+print(cb.Appetizer.entropy(cb, train[['Parch']]))               # 4.23
+print(cb.Appetizer.entropy(cb, train[['Embarked']]))            # 1.70
+print(cb.Appetizer.entropy(cb, train[['Name']]))                # 1.00 : it means this feature is not helpful
+
 
 
 

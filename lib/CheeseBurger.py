@@ -97,6 +97,47 @@ class Appetizer:
     # 1.0 <= entropy
     # entropy = 1.0 : in flatten perfectly.
     # entropy is represent to how many
+    #
+    # 나이분포가
+    # 10대 : 10명, 20대 : 20명, 30대 : 30명 일때.
+    # entropy = ( (10/60)^2 + (20/60)^2 + (30/60)^2 ) * 3
+    #
+    # entropy([0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, ])
+    # # 12.0
+    #
+    # entropy([0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, ])
+    # # 12.0
+    #
+    # entropy([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1001, 1, 1, 1, 1, 1, 1, 1, 1, ])
+    # # 19.26
+    #
+    # entropy(
+    #     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1001, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    #      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+    # # 48.70
+    #
+    # # 아래 조건을 만족해야 함.
+    # # condition : 데이터 갯수와 데이터 값 자체의 높고 낮음은 영향을 주지 않아야 한다.
+    # only1 = [1, 1, 1, 1]
+    # only10 = [10, 10, 10, 10, 10, 10, 10, 10]
+    # # entropy = 1.0
+    #
+    # # below should have same entropy.
+    # original = [1, 2, 1, 1, 0, 1]
+    # double_original = [1, 2, 1, 1, 0, 1, 1, 2, 1, 1, 0, 1]
+    # # entropy = 1.33
+    #
+    # # below should have same entropy.
+    # left_side = [10, 10, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    # center_side = [1, 1, 1, 1, 1, 10, 10, 10, 1, 1, 1, 1, 1]
+    # # entropy = 2.5187
+    #
+    '''
+    argument
+    selected_col : pandas.DataFrame
+        input the 1 col dataframe.
+        entropy(df[["column_A]])
+    '''
     def entropy(self, selected_col: pandas.DataFrame):
         # arr = arr.groupby(['Pclass']).size()
         # list(train[['Sex']].values.flatten())
@@ -107,7 +148,7 @@ class Appetizer:
         ent = 0
         for val in arr:
             ent += (val / sum(arr)) ** 2
-        return ent
+        return ent * len(arr)
 
     levelingDictionary = []
 
@@ -138,6 +179,7 @@ Countinuous 한 featue는
 쉽게 leveling 이 가능하지만 Categorycal 한 data 는 불가능.
 
 > Clustering 으로 leveling을 할 수 있을 듯.
+entropy 가 높아지는 방향으로 clustering 이 되도록 하면 될듯?
 '''
 class Cluster:
     def initialize(self):

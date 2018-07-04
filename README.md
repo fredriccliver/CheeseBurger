@@ -10,9 +10,9 @@
 
 
 ## 연산순서
-1. feature **scailing**
-2. calculate **entropy**
-3. calculate **feature weight** (importants by every features)
+1. feature **scaling** (entropy를 구할때는 scaling 필요 없음.)
+2. calculate **entropy** (entropy 값을 그대로 weight 로 사용가능.)
+3. calculate **feature weight** (how importants features than others)
 4. summary data point, stack to **the recipe** (the model)
 5. call predict function with test data
 6. get the suited point of every feature as test data's value from recipe (the making of **Burger Matrix**)
@@ -23,7 +23,7 @@
 
 ## Descriptions for Directory and Files 
 
-> ./exercise
+> **./exercise**
 > 
 > 개발과정 중에 만든 파이썬 문법 및 라이브러리 연습용 파일을 모아둡니다.
 
@@ -61,23 +61,24 @@ categorical 한 data 는 불가능.
 
 ```python
 # recipe(call model, officially) example
-# structure of recipe is array of matrix.
+# structure of recipe is matrix of arrays.
 recipe = [
-    [
-        [ 4 , 0 , 0 ],
-        [ 2 , 4 , 0 ],
-        [ 0 , 2 , 3 ],
-        [ 0 , 0 , 1 ]
+    [ # feature1
+        # [ 'class1 count', 'class2 count', 'class3 count']
+        [ 4 , 0 , 0 ], # feature1 = val1
+        [ 2 , 4 , 0 ], # feature1 = val2
+        [ 0 , 2 , 3 ], # feature1 = val3
+        [ 0 , 0 , 1 ]  # feature1 = val4
     ],
-    [
-        [ 0 , 1 , 2 ],
-        [ 5 , 1 , 1 ],
-        [ 5 , 1 , 2 ],
-        [ 3 , 2 , 2 ],
-        [ 1 , 2 , 1 ]
+    [ # feature2
+        [ 0 , 1 , 2 ], # feature2 = val1
+        [ 5 , 1 , 1 ], # feature2 = val2
+        [ 5 , 1 , 2 ], # feature2 = val3
+        [ 3 , 2 , 2 ], # feature2 = val4
+        [ 1 , 2 , 1 ]  # feature2 = val5
     ],
-    [
-        [ 0 , 1 , 5 ],
+    [ #feature3
+        [ 0 , 1 , 5 ], 
         [ 7 , 3 , 2 ]
     ]
 ]
@@ -116,55 +117,3 @@ probabiliityArray = [
 # Probability of Class2 is 44%.
 ```
 
-
-## feature 별 가중치 계산법
-> 데이터를 분산도를 측정.
-> entropy 계산 공식 별도로 제작함.
-```
-    def entropy(self, selected_col: pandas.DataFrame):
-        counts_list = selected_col.groupby(list(selected_col)[0]).size()
-        arr = list(counts_list)
-
-        ent = 0
-        for val in arr:
-            ent += (val / sum(arr)) ** 2
-        
-        return ent
-```
-
-나이분포가
-10대 : 10명, 20대 : 20명, 30대 : 30명 일때.
-
-entropy = ( (10/60)^2 + (20/60)^2 + (30/60)^2 ) * 3
-
-```python
-entropy([0,0,0,0,0,0,0,0,100,0,0,0,])
-# 12.0
-
-entropy([0,0,0,0,0,0,0,0,1,0,0,0,])
-# 12.0
-
-entropy([1,1,1,1,1,1,1,1,1,1,1,1001,1,1,1,1,1,1,1,1,])
-# 19.26
-
-entropy([1,1,1,1,1,1,1,1,1,1,1,1001,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
-# 48.70
-
-
-# 아래 조건을 만족해야 함.
-# condition : 데이터 갯수와 데이터 값 자체의 높고 낮음은 영향을 주지 않아야 한다.
-only1 = [1,1,1,1]
-only10 = [10,10,10,10,10,10,10,10]
-# entropy = 1.0
-
-# below should have same entropy.
-original = [1, 2, 1, 1, 0, 1]
-double_original = [1, 2, 1, 1, 0, 1, 1, 2, 1, 1, 0, 1]
-# entropy = 1.33
-
-# below should have same entropy.
-left_side = [10,10,10,1,1,1,1,1,1,1,1,1,1]
-center_side = [1,1,1,1,1,10,10,10,1,1,1,1,1]
-# entropy = 2.5187
-
-```
