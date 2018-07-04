@@ -1,8 +1,12 @@
+# import sys
+# sys.path.insert(0, "../lib")
+
 import pandas as pd
 import numpy
 import scipy.stats
+import lib.CheeseBurger as cb
 
-train = pd.read_csv("./data/train.csv", index_col='PassengerId')
+train = pd.read_csv("../data/train.csv", index_col='PassengerId')
 feature_arr = train.ix[:, "Pclass"]
 
 train['FamilySize'] = train['SibSp'] + train['Parch']
@@ -10,12 +14,17 @@ train['FamilySize'] = train['SibSp'] + train['Parch']
 # string 으로 읽고 싶다면 str() 말고 .astype() 을 사용해야 함.
 #train['SexAndPclass'] = train['Sex'] + str(train['Pclass'])
 train['SexAndPclass'] = train['Sex'] + train['Pclass'].astype("str")
-train['GenerationsBy10'] = numpy.ceil(train['Age']/10)
-train['GenerationsBy20'] = numpy.ceil(train['Age']/20)
-train['GenerationsBy50'] = numpy.ceil(train['Age']/50)
-#train['GenerationsBy150'] = numpy.ceil(train['Age']/150)
+train['GenerationsBy10'] = numpy.floor(train['Age']/10)
+train['GenerationsBy20'] = numpy.floor(train['Age']/20)
+train['GenerationsBy50'] = numpy.floor(train['Age']/50)
+#train['GenerationsBy150'] = numpy.floor(train['Age']/150)
 
-print(train.head())
+print(
+    train.ix[
+        0:30,
+        ['Age', 'GenerationsBy10', 'GenerationsBy20','GenerationsBy50']
+    ]
+)
 #print(train.ix[0:10,"AgeClass"])
 # print(feature_arr.head())
 
@@ -111,3 +120,36 @@ printFeatureWeight("GenerationsBy50")
 print(len(train.groupby("GenerationsBy10")))
 print(len(train.groupby("GenerationsBy20")))
 print(len(train.groupby("GenerationsBy50")))
+
+
+print("----------")
+
+# print(cb.Appetizer.entropy(cb,
+#     arr=list(train.groupby(['Pclass']).size().values.flatten())
+# ))
+
+# a simple way for getting list of columns name
+# > list(df)
+# > list(df)[0] : first column's name
+
+
+print(cb.Appetizer.entropy(cb, train[['Pclass']]))              # 1.21
+print(cb.Appetizer.entropy(cb, train[['Sex']]))                 # 1.08
+print(cb.Appetizer.entropy(cb, train[['SexAndPclass']]))        # 1.37
+print(cb.Appetizer.entropy(cb, train[['Age']]))                 # 1.93
+print(cb.Appetizer.entropy(cb, train[['Fare']]))                # 3.63
+print(cb.Appetizer.entropy(cb, train[['SibSp']]))               # 3.65
+print(cb.Appetizer.entropy(cb, train[['Parch']]))               # 4.23
+print(cb.Appetizer.entropy(cb, train[['Embarked']]))            # 1.70
+print(cb.Appetizer.entropy(cb, train[['Name']]))                # 1.00 : it means this feature is not helpful
+
+
+
+
+# print(
+#     list(train.groupby(['Pclass']).size().values.flatten())
+# )
+
+
+#print(list(train[['Sex']].values.flatten()))
+

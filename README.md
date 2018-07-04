@@ -10,9 +10,9 @@
 
 
 ## 연산순서
-1. feature **scailing**
-2. calculate **entropy**
-3. calculate **feature weight** (importants by every features)
+1. feature **scaling** (entropy를 구할때는 scaling 필요 없음.)
+2. calculate **entropy** (entropy 값을 그대로 weight 로 사용가능.)
+3. calculate **feature weight** (how importants features than others)
 4. summary data point, stack to **the recipe** (the model)
 5. call predict function with test data
 6. get the suited point of every feature as test data's value from recipe (the making of **Burger Matrix**)
@@ -23,7 +23,7 @@
 
 ## Descriptions for Directory and Files 
 
-> ./exercise
+> **./exercise**
 > 
 > 개발과정 중에 만든 파이썬 문법 및 라이브러리 연습용 파일을 모아둡니다.
 
@@ -42,6 +42,16 @@
 > 
 > 학습용 749개 row
 
+
+
+Categorical 한 data 는 scailing 불가, leveling 도 불가.
+numerical 한 featrue 는 1~10, 10~20 등으로 묶을 수 있지만, 
+categorical 한 data 는 불가능. 
+하지만, clustering 으로는 categorical 한 data를 묶을 수 있지 않겠나?
+
+[]clustering 부분 개발.
+
+
 > **data/train-sep-for-test.csv**
 > 
 > 테스트용 142개 row
@@ -51,23 +61,24 @@
 
 ```python
 # recipe(call model, officially) example
-# structure of recipe is array of matrix.
+# structure of recipe is matrix of arrays.
 recipe = [
-    [
-        [ 4 , 0 , 0 ],
-        [ 2 , 4 , 0 ],
-        [ 0 , 2 , 3 ],
-        [ 0 , 0 , 1 ]
+    [ # feature1
+        # [ 'class1 count', 'class2 count', 'class3 count']
+        [ 4 , 0 , 0 ], # feature1 = val1
+        [ 2 , 4 , 0 ], # feature1 = val2
+        [ 0 , 2 , 3 ], # feature1 = val3
+        [ 0 , 0 , 1 ]  # feature1 = val4
     ],
-    [
-        [ 0 , 1 , 2 ],
-        [ 5 , 1 , 1 ],
-        [ 5 , 1 , 2 ],
-        [ 3 , 2 , 2 ],
-        [ 1 , 2 , 1 ]
+    [ # feature2
+        [ 0 , 1 , 2 ], # feature2 = val1
+        [ 5 , 1 , 1 ], # feature2 = val2
+        [ 5 , 1 , 2 ], # feature2 = val3
+        [ 3 , 2 , 2 ], # feature2 = val4
+        [ 1 , 2 , 1 ]  # feature2 = val5
     ],
-    [
-        [ 0 , 1 , 5 ],
+    [ #feature3
+        [ 0 , 1 , 5 ], 
         [ 7 , 3 , 2 ]
     ]
 ]
@@ -105,3 +116,4 @@ probabiliityArray = [
 
 # Probability of Class2 is 44%.
 ```
+
