@@ -5,6 +5,7 @@ import pandas as pd
 import math
 import numpy
 import scipy.stats
+import lib.CheeseBurger as cb
 
 
 train = pd.read_csv('../data/train.csv')
@@ -100,6 +101,9 @@ original = [1, 2, 1, 1, 0, 1]
 leveled = [3, 2, 1]
 # entropy = 1.16
 
+leveled_more = [4,2]
+# entropy = 1.11
+
 
 # 적합한 entropy 값을 뽑아내는 함수를 만들어야 한다.
 # 아래 조건들을 만족해야 함.
@@ -122,15 +126,15 @@ center_side = [1,1,1,1,1,10,10,10,1,1,1,1,1]
 def entropy(arr):
     ent = 0
     for val in arr:
-        #print((val/sum(arr)) ** 2)
         ent += (val/sum(arr)) ** 2
 
-    print(ent * len(arr))
+    return ent * len(arr)
 
-    return
 
-entropy(original)
-entropy(leveled)
+print(entropy(original))
+print(entropy(leveled))
+print(entropy(leveled_more))
+
 
 entropy(only1)
 entropy(only10)
@@ -144,16 +148,16 @@ entropy(center_side)
 print('----------------')
 
 
-entropy([0,0,0,0,0,0,0,0,100,0,0,0,])
+print(entropy([0,0,0,0,0,0,0,0,100,0,0,0,]))
 # 12.0
 
-entropy([0,0,0,0,0,0,0,0,1,0,0,0,])
+print(entropy([0,0,0,0,0,0,0,0,1,0,0,0,]))
 # 12.0
 
-entropy([1,1,1,1,1,1,1,1,1,1,1,1001,1,1,1,1,1,1,1,1,])
+print(entropy([1,1,1,1,1,1,1,1,1,1,1,1001,1,1,1,1,1,1,1,1,]))
 # 19.26
 
-entropy([1,1,1,1,1,1,1,1,1,1,1,1001,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+print(entropy([1,1,1,1,1,1,1,1,1,1,1,1001,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]))
 # 48.70
 
 # conclusion.
