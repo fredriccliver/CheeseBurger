@@ -9,11 +9,7 @@ import scipy.stats
 
 train = pd.read_csv('../data/train.csv')
 
-
-
 # Age 와 Generation 의 분포정도(편향도) 가 같다고 표현해낼 수 있는 entropy 계산식을 만들어야 함.
-
-
 
 train.loc[
     train['Sex'] == 'male',
@@ -33,18 +29,19 @@ train['Generation_by20'] = numpy.floor(train['Age']/20)
 train['Old'] = numpy.floor(train['Age']/50)
 train = train.dropna()
 
-print(
-    train.ix[:,['Sex_digit', 'Age', 'Generation','Generation_by20' 'Old']]
-)
-
-print(scipy.stats.entropy(train['Sex_digit']))
-print(scipy.stats.entropy(train['Pclass']))
-print(scipy.stats.entropy(train['Parch']))
-print(scipy.stats.entropy(train['Age']))
-print(scipy.stats.entropy(train['Generation']))
-print(scipy.stats.entropy(train['Generation_by20']))
-print(scipy.stats.entropy(train['Old']))
-print(scipy.stats.entropy(train['Fare']))
+# print(
+#     train.ix[:,['Sex_digit', 'Age', 'Generation','Generation_by20' 'Old']]
+# )
+#
+# print(scipy.stats.entropy(train['Sex_digit']))
+# print(scipy.stats.entropy(train['Pclass']))
+# print(scipy.stats.entropy(train['Parch']))
+# print(scipy.stats.entropy(train['Age']))
+# print(scipy.stats.entropy(train['Generation']))
+# print(scipy.stats.entropy(train['Generation_by20']))
+# print(scipy.stats.entropy(train['Old']))
+# print(scipy.stats.entropy(train['Fare']))
+#
 # 4.553876891600542     (Sex_digit)
 # 5.137922658766879     (Pclass)
 # 4.035678834169101     (Parch)
@@ -58,8 +55,6 @@ print(scipy.stats.entropy(train['Fare']))
 # 하지만 feature 마다 값차이가 별로 없음. log 함수로 값을 뽑아서 그런지?
 # 이대로는 못씀.
 
-
-
 '''
 # print(scipy.stats.entropy(train['Sex']))
 
@@ -71,12 +66,72 @@ TypeError: can't multiply sequence by non-int of type 'float'
 '''
 
 
-# nan 값이 있는 row 도 drop 하지 않고, 값이 없음 역시 값으로 다루면 좋을 듯.
+# nan 값이 있는 row 도 drop 하지 않고, 값이 없음 역시 또 하나의 값으로 다루면 좋을 듯.
+
+'''
+각 feature 마다 값별 분포를 뽑아보는 중.
+'''
+# grouped_sum = train.groupby('Survived').aggregate(np.sum)
+# grouped_count = train.groupby('Survived').aggregate(np.count_nonzero)
+#
+#
+# print(grouped_sum.describe)
+# print(grouped_count.iloc[:10,:6].describe)
+#
+#
+# <bound method NDFrame.describe of           PassengerId  Pclass      Age  ...   Generation  Generation_by20   Old
+# Survived                                ...
+# 0               24179      73  2481.00  ...        219.0             95.0  19.0
+# 1               59153     145  4047.42  ...        347.0            141.0  17.0
+#
+# [2 rows x 10 columns]>
+# <bound method NDFrame.describe of           PassengerId  Pclass  Name  Sex    Age  SibSp
+# Survived
+# 0                  60      60    60   60   60.0     19
+# 1                 123     123   123  123  123.0     54>
+
+# 값별로 group화 해서 값별 count 뽑는 법은 /exercise/dataframe_groupby.py 참조.
+
+# group by 해서, 값별 count.
+original = [1, 2, 1, 1, 0, 1]
+
+# leveled data of above.
+leveled = [3, 2, 1]
+
+
+# 적합한 entropy 값을 뽑아내는 함수를 만들어야 한다.
+# 아래 조건들을 만족해야 함.
+# condition : 데이터 갯수와 데이터 값 자체의 높고 낮음은 영향을 주지 않아야 한다.
+only1 = [1,1,1,1]
+only10 = [10,10,10,10,10,10,10,10]
+
+# below should have same entropy.
+original = [1, 2, 1, 1, 0, 1]
+double_original = [1, 2, 1, 1, 0, 1, 1, 2, 1, 1, 0, 1]
+
+# below should have same entropy.
+left_side = [10,10,10,1,1,1,1,1,1,1,1,1,1]
+center_side = [1,1,1,1,1,10,10,10,1,1,1,1,1]
 
 
 
-grouped = train.groupby('Pclass').aggregate(np.sum)
-grouped = train.groupby('Pclass').aggregate(np.count_nonzero)
+def entropy(arr):
+    ent = 0
+    for val in arr:
+        #print((val/sum(arr)) ** 2)
+        ent += (val/sum(arr)) ** 2
 
-print(grouped.iloc[:10,:6].describe)
+    print(ent * len(arr))
 
+    return
+
+entropy(original)
+entropy(leveled)
+
+entropy(only1)
+entropy(only10)
+
+entropy(double_original)
+
+entropy(left_side)
+entropy(center_side)
