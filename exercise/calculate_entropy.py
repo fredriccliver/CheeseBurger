@@ -4,10 +4,7 @@
 import pandas as pd
 import numpy
 import scipy.stats
-# import CheeseBurger.
 import lib.CheeseBurger as cb
-
-
 
 train = pd.read_csv("../data/train.csv", index_col='PassengerId')
 feature_arr = train.ix[:, "Pclass"]
@@ -125,4 +122,28 @@ print(len(train.groupby("GenerationsBy20")))
 print(len(train.groupby("GenerationsBy50")))
 
 
+print("----------")
+
+# print(cb.Appetizer.entropy(cb,
+#     arr=list(train.groupby(['Pclass']).size().values.flatten())
+# ))
+
+# a simple way for getting list of columns name
+# > list(df)
+# > list(df)[0] : first column's name
+
+
+print(cb.Appetizer.entropy(cb, train[['Pclass']]))              # 0.40
+print(cb.Appetizer.entropy(cb, train[['Sex']]))                 # 0.54
+print(cb.Appetizer.entropy(cb, train[['SexAndPclass']]))        # 0.22
+print(cb.Appetizer.entropy(cb, train[['Age']]))                 # 0.02
+
+
+
+# print(
+#     list(train.groupby(['Pclass']).size().values.flatten())
+# )
+
+
+#print(list(train[['Sex']].values.flatten()))
 

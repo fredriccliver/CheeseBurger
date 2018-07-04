@@ -1,6 +1,8 @@
 # Custom Machine Learing Class.
 # 2018.06.27
 
+import pandas
+
 class Classifier:
 
 
@@ -92,6 +94,20 @@ class Appetizer:
     # if want to know original value diversity of 'feature_A', code is below
     # scalingMetaDate[featureDictionary.getIdx("feature_A")]
 
+    # 1.0 <= entropy
+    # entropy = 1.0 : in flatten perfectly.
+    # entropy is represent to how many
+    def entropy(self, selected_col: pandas.DataFrame):
+        # arr = arr.groupby(['Pclass']).size()
+        # list(train[['Sex']].values.flatten())
+
+        counts_list = selected_col.groupby(list(selected_col)[0]).size()
+        arr = list(counts_list)
+
+        ent = 0
+        for val in arr:
+            ent += (val / sum(arr)) ** 2
+        return ent
 
     levelingDictionary = []
 
