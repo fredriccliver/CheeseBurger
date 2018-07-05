@@ -139,9 +139,6 @@ class Appetizer:
         entropy(df[["column_A]])
     '''
     def entropy(self, selected_col: pandas.DataFrame):
-        # arr = arr.groupby(['Pclass']).size()
-        # list(train[['Sex']].values.flatten())
-
         counts_list = selected_col.groupby(list(selected_col)[0]).size()
         arr = list(counts_list)
 
@@ -149,6 +146,13 @@ class Appetizer:
         for val in arr:
             ent += (val / sum(arr)) ** 2
         return ent * len(arr)
+
+    def entropy_list(self, data:list):
+
+        ent = 0
+        for val in data:
+            ent += (val / sum(data)) ** 2
+        return ent * len(data)
 
     levelingDictionary = []
 

@@ -1,12 +1,13 @@
-# import sys
-# sys.path.insert(0, "../lib")
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.dirname(__file__) +'/..'))
 
 import pandas as pd
 import numpy
 import scipy.stats
 import lib.CheeseBurger as cb
 
-train = pd.read_csv("../data/train.csv", index_col='PassengerId')
+train = pd.read_csv("data/train.csv", index_col='PassengerId')
 feature_arr = train.ix[:, "Pclass"]
 
 train['FamilySize'] = train['SibSp'] + train['Parch']
