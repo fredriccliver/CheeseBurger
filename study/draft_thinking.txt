@@ -1,0 +1,58 @@
+
+algorithm 종류.
+
+machine learning cheat sheet
+
+학습 핵심.
+
+- under/over fitting 방지
+- 중요한 feature 찾기
+- 학습 속도
+- 문제의 종류 : regression(값으로 예측), 
+    2 class classification(yes or not, apply sigmoid), 
+    multi classification (softmax)
+- multi class & combine result
+    [ ANGER: 10, CRY:2, FRUSTRATE:8]
+    기준치 이상이면 Combined Class to Result. [ANGER, FRUSTRATE]
+- kerneling
+    finding important feature newly
+- 적절한지, 아닌지의 판단.
+    under/over fitting 인지 아닌지 확인하는 방법을 algorithm화.
+    numeric value 를 만들어서 우선순위로 비교한다 하여도, linear 하게 평가해야하는지, logarithm 하게 평가해야하는지.
+- original feature 와 kerneling 된 featrue 를 동등하게 비교해도 되는지.
+
+
+이미지 인식으로 이전할때.
+어떠한 모양이면 어떤 동물이다 >> 불가능.
+자세, 각도 등에 따라 다름.
+
+패턴을 인식해야 함.
+
+100 x 100 픽셀을 가공해서 feature 를 high dimention 화 하고,
+각 dimention 을 feature 로써 편향도 측정.
+
+인접한 검정, 원형 픽셀이 있다. > new feature.
+이미지에서 해당 feature 계산.
+
+모든 data에서 new feature 에 대한 편향도를 확인 > 이미지마다 거의 존재한다.
+이 feature 의 값을 확인.
+'얼굴' feature 와 얼굴 size 를 나타내는 feature 확인.
+
+얼굴 크키 feature 와, 눈크기 feature 의 ratio 값이 편향도가 높더라.
+> 100,000개의 data를 넣어도 100가지로 clustering 이 잘 되더라. >> grouping(leveling)이 잘됨.
+> entropy 가 높음.
+> 중요한 feature.
+
+눈/얼굴 비율, 눈색상, 눈썹 존재여부 등 가중치를 높게 줄 수 있는 feature 들을 결정.
+> decision feature 목록을 작성.
+
+decision feature 별 점수 통합.
+
+[파충류, 몸 너비대 길이 비율 높음, 입이 큼] > ['악어':92%, '뱀':73%]
+multiclass 로 output.
+
+Threshold = 70% 인 판단상황일 때는 악어일수도 있고, 뱀일수도 있고.
+
+Threshold = 90% 인 판단상황일 때는 '악어'
+
+Threshold = 99% 인 판단상황이면, 결정불가능.

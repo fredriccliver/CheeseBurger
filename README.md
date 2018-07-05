@@ -1,15 +1,23 @@
 # CheeseBurger Machine Learning Library
-28 Jun, 2018
 
+28 Jun, 2018
 
 - Regression 은 추후 구현.
 - 우선은 Classifier 만 제작할 예정.
 - 모든 feature를 continuous 하지 않고, cetegorical 한 데이터로 다룸.
 - Class 3개 이상 가능.
 - feature 마다 Entropy 를 계산하여 변별력 정도를 확인 후 prediction 에 적용.
-
+- Naive Bayes 알고리즘과 비슷한 방법을 이용. 확률함수의 형태를 갖는 모델.
+- feature 중 entropy 가 일정수준 이상인 feature 만 사용해서 학습성능을 높일 수 있도록. (feature 자동선별)
+- Naive Bayes 와 유사한 형태에 가중치 벡터를 이용해서 feature 간 차등을 두어 학습이 가능.
+- Decision Tree 같은 순차적 학습과는 다르게 학습 깊이에 따른 over/under fitting 문제가 덜하게.
+- 가장 중요한 개선점은 분별력 없는 feature를 학습에 적용해도 모델이 알아서 그 부분을 배제할 수 있도록.
+- 추후 feature 를 이용한 자동 kurneling 이 가능하도록.
+- Classificatin 만이 아닌 Regression 도 가능하도록. (feature 의 값별 point 계산, feature 별 가중치 계산이 핵심이기 때문에 Regression 도 가능.)
+- 
 
 ## 연산순서
+
 1. feature **scaling** (entropy를 구할때는 scaling 필요 없음.)
 2. calculate **entropy** (entropy 값을 그대로 weight 로 사용가능.)
 3. calculate **feature weight** (how importants features than others)
@@ -19,17 +27,14 @@
 7. product **weight vector**(in 3.) **Burger Matrix**(in 6.)
 8. find the best probable class.
 
-
-
 ## Descriptions for Directory and Files 
 
 > **./exercise**
-> 
+>
 > 개발과정 중에 만든 파이썬 문법 및 라이브러리 연습용 파일을 모아둡니다.
-
-
-> **./Class/CheeseBurger.py**
 > 
+> **./Class/CheeseBurger.py**
+>
 > 제작 중인 머신러닝 클래스.
 > 우선은 Classifier 기능을 구현해서 Kaggle Titanic 에 써볼 수 있도록.
 
