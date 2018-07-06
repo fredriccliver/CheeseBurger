@@ -176,11 +176,19 @@ class Appetizer:
         value is data point count
         element count is same with feature values level.
     '''
-    def entropy_from_list(self, data:list):
+    # def entropy_from_list(self, data:list):
+    #     ent = 0
+    #     for val in data:
+    #         ent += (val / sum(data)) ** 2
+    #         print(ent)
+    #     return ent * len(data)
 
+    def entropy_from_list(self, data:list):
+        
         ent = 0
         for val in data:
             ent += (val / sum(data)) ** 2
+        
         return ent * len(data)
 
     levelingDictionary = []

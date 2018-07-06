@@ -13,8 +13,11 @@ import numpy as np
 train = pd.read_csv('data/train.csv')
 
 
-train['Fare'].hist(bins=100)
+train['Fare'].hist(bins=50)
+
+
+train['Age'].hist(bins=50)
 plt.show()
 
-train['Age'].hist(bins=100)
-plt.show()
+train['Parch'].hist(hins=10)
+

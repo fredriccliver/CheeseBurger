@@ -78,28 +78,44 @@ train = pd.read_csv('data/train.csv')
 label_col_name = 'Survived'
 
 
-def entropy_independently(train_data: list, label_col_name: str, feature_col_name: str):
-    
-    class_names = list(train_data[[label_col_name]].groupby(label_col_name).size().keys())
-    divided_col_by_classes = []
 
-    for class_name in class_names:
+def entropy_independently(train_data: list, label_col_name: str, feature_col_name: str):
+    '''
+    arguments
+        train_data: list, 
+        label_col_name: str, 
+        feature_col_name: str
+    '''
+    class_names = list(train_data[[label_col_name]].groupby(label_col_name).size().keys())
+    levels = list(train_data[[feature_col_name]].groupby(feature_col_name).size().keys())
+    
+    divided_col_by_classes = []
+    
+    for level in levels:
         
         divided_col_by_classes.append(
-            train_data.loc[train_data[label_col_name] == class_name, feature_col_name].to_frame()
+            # train_data.loc[train_data[label_col_name] == class_name, feature_col_name].to_frame()
+            list(train_data.loc[train_data[feature_col_name] == level, [label_col_name,feature_col_name]].groupby(label_col_name).size())
         )
     
-    entropy_arr = []    # this array have element, the count is same with class count.
+    # entropy_arr = []    # this array have element, the count is same with class count.
+    # for val_list_by_class in divided_col_by_classes:
+        
+    #     entropy_arr.append(
+    #         cb.Appetizer.entropy(
+    #             cb,
+    #             val_list_by_class
+    #         )
+    #     )
+    # return sum(entropy_arr)
+    summary_entropy = 0
     for val_list_by_class in divided_col_by_classes:
         
-        entropy_arr.append(
-            cb.Appetizer.entropy(
-                cb,
-                val_list_by_class
-            )
+        summary_entropy += cb.Appetizer.entropy_from_list(
+            cb,
+            val_list_by_class
         )
-    return sum(entropy_arr)
-
+    return summary_entropy
 
 
 
@@ -117,6 +133,8 @@ def entropy_independently(train_data: list, label_col_name: str, feature_col_nam
 # )
 
 
+'''
+
 # class ignored entropy
 print('%15s' % 'Pclass : ' + str(cb.Appetizer.entropy(cb, train[['Pclass']])))              # 1.21
 print('%15s' % 'Sex : ' + str(cb.Appetizer.entropy(cb, train[['Sex']])))                 # 1.08
@@ -126,14 +144,14 @@ print('%15s' % 'SibSp : ' + str(cb.Appetizer.entropy(cb, train[['SibSp']])))    
 print('%15s' % 'Parch : ' + str(cb.Appetizer.entropy(cb, train[['Parch']])))               # 4.23
 print('%15s' % 'Embarked : ' + str(cb.Appetizer.entropy(cb, train[['Embarked']])))            # 1.70
 print('%15s' % 'Name : ' + str(cb.Appetizer.entropy(cb, train[['Name']])))                # 1.00 : it means this feature is not helpful
-    #   Pclass : 1.2152690390625296
-    #      Sex : 1.087127667748693
-    #      Age : 1.9319414040125862
-    #     Fare : 3.6396487634796717
-    #    SibSp : 3.6573252162477754
-    #    Parch : 4.233033666254767
-    # Embarked : 1.7039494078988158
-    #     Name : 1.0000000000000053
+#   Pclass : 1.2152690390625296
+#      Sex : 1.087127667748693
+#      Age : 1.9319414040125862
+#     Fare : 3.6396487634796717
+#    SibSp : 3.6573252162477754
+#    Parch : 4.233033666254767
+# Embarked : 1.7039494078988158
+#     Name : 1.0000000000000053
 
 print("\n")
 # summary class entropy indepently
@@ -145,17 +163,48 @@ print('%15s' % 'SibSp : ' + str(entropy_independently(train, label_col_name, "Si
 print('%15s' % 'Parch : ' + str(entropy_independently(train, label_col_name, "Parch")))    # 7.27
 print('%15s' % 'Embarked : ' + str(entropy_independently(train, label_col_name, "Embarked"))) # 3.36
 print('%15s' % 'Name : ' + str(entropy_independently(train, label_col_name, "Name")))     # 2.00
-    #   Pclass : 2.566516018393548
-    #      Sex : 2.62836868536768
-    #      Age : 3.3288721221155564
-    #     Fare : 5.767089465051383
-    #    SibSp : 6.34267182323186
-    #    Parch : 7.272555834612472
-    # Embarked : 3.3626349582398296
-    #     Name : 2.0000000000000115
+#   Pclass : 2.566516018393548
+#      Sex : 2.62836868536768
+#      Age : 3.3288721221155564
+#     Fare : 5.767089465051383
+#    SibSp : 6.34267182323186
+#    Parch : 7.272555834612472
+# Embarked : 3.3626349582398296
+#     Name : 2.0000000000000115
+
+'''
 
 # 클래스 별로 엔트로피를 따로 구해서 합산 했지만 클래스를 무시했을 때와 크게 다른 점이 없음.
 # 추후, class * feature 로 entropy 를 따로 계산해서 2차원 배열로 entropy 를 구성해서 point 계산시 따로 적용하는 것을 고려해야 함.
 # titanic prediction 은 two class 라서 iris prediction 처럼 multi class classification 으로 다시 entropy 를 계산해 보아야 함.
 
+# class를 무시하고 data 분포만을 확인한 entropy 값은 아무런 의미가 없음.
 
+
+
+d = {
+    'sex': ['man', 'man', 'man', 'man', 'man', 'women', 'women', 'women', 'women', 'women' ],
+    'survived' : [0,0,0,0,1,1,1,1,1,0]
+}
+df_women_survived = pd.DataFrame(data=d)
+
+d = {
+    'sex': ['man', 'man', 'man', 'man', 'man', 'women', 'women', 'women', 'women', 'women' ],
+    'survived' : [0,0,1,0,1,0,0,1,0,1]
+}
+df_equality = pd.DataFrame(data=d)
+
+d = {
+    'sex': ['man', 'man', 'man', 'man', 'man', 'women', 'women', 'women', 'women', 'women' ],
+    'survived' : [0,0,0,0,0,1,1,1,1,1]
+}
+df_genocide = pd.DataFrame(data=d)
+
+print("\n")
+
+print( entropy_independently(df_women_survived, 'survived', 'sex'))     # 높아야 함
+print( entropy_independently(df_equality, 'survived', 'sex'))           # 가장 낮아야 함
+print( entropy_independently(df_genocide, 'survived', 'sex'))           # 가장 높아야 함.
+# 2.7200000000000006
+# 2.08
+# 2.0

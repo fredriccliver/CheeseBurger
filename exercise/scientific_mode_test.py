@@ -3,6 +3,8 @@
 # If using this mode, you can check plots conveniently
 # you can check more in this link : https://www.jetbrains.com/help/pycharm/matplotlib-tutorial.html
 
+# in pycharm, remove useless underline alert.
+# > move in the underline the cursor > option + enter > ignore errors like this.
 
 
 import numpy as np

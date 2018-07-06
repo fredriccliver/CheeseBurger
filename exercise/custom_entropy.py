@@ -1,3 +1,7 @@
+import os
+import sys
+sys.path.insert(0,os.path.abspath(os.path.dirname(__file__) +'/..'))
+
 # make fiting entropy calculation algorithm
 
 import numpy as np
@@ -8,7 +12,7 @@ import scipy.stats
 import lib.CheeseBurger as cb
 
 
-train = pd.read_csv('../data/train.csv')
+train = pd.read_csv('data/train.csv')
 
 # Age 와 Generation 의 분포정도(편향도) 가 같다고 표현해낼 수 있는 entropy 계산식을 만들어야 함.
 
