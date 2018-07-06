@@ -5,6 +5,8 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__) +'/..'))
 import lib.CheeseBurger as cb
 import pandas as pd
 import seaborn as sb
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 # feature 배열에서 entropy 를 계산하는것과,
@@ -156,5 +158,4 @@ print('%15s' % 'Name : ' + str(entropy_independently(train, label_col_name, "Nam
 # 추후, class * feature 로 entropy 를 따로 계산해서 2차원 배열로 entropy 를 구성해서 point 계산시 따로 적용하는 것을 고려해야 함.
 # titanic prediction 은 two class 라서 iris prediction 처럼 multi class classification 으로 다시 entropy 를 계산해 보아야 함.
 
-sb.barplot(x = "Pclass",y = "Survived",data=train)
 
