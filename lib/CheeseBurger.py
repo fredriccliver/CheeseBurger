@@ -147,7 +147,36 @@ class Appetizer:
             ent += (val / sum(arr)) ** 2
         return ent * len(arr)
 
-    def entropy_list(self, data:list):
+    '''
+    summary entropy for class, devided by each class
+    whole feature 'a' entropy = entropy(feature 'a' rows, in label=Class_A) + entropy(feature 'a' rows, in label=Class_B) + ...
+    '''
+    def featureEntropy(self, selected_col: pandas.DataFrame):
+        
+        return
+
+
+    # class_size = len(data_with_class[0])
+
+    # def sumEntropyByClass(data:list):
+    #     entropy_class_summary = 0
+        
+    #     for col in range(class_size):
+            
+    #         entropy_class_summary += cb.Appetizer.entropy_list(
+    #             cb, 
+    #             list(map(lambda x: x[col], data_with_class))
+    #         )
+    #     return entropy_class_summary    
+        
+
+    '''
+    calculate entropy using the list type augument.
+    eg) data = [2, 10, 10, 5, 2, 1]
+        value is data point count
+        element count is same with feature values level.
+    '''
+    def entropy_from_list(self, data:list):
 
         ent = 0
         for val in data:
