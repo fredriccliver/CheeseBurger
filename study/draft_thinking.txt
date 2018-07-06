@@ -95,3 +95,7 @@ data 를 일일히 정리해서 집어넣어주는 것도 문제가 있음.
 
 
 
+
+
+캐글 titanic feature 분석 아래 링크 참조
+https://www.kaggle.com/jatturat/finding-important-factors-to-survive-titanic
