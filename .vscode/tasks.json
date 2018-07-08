@@ -8,8 +8,8 @@
             "type": "shell",
             "command": "python3",
             "args": [
-                "${file}"
-                //"./example/test.py" // 클래스 수정하면서 test.py 파일 바로 실행시키기 위해.
+                //"${file}"
+                "./example/test.py" // 클래스 수정하면서 test.py 파일 바로 실행시키기 위해.
             ],
             "presentation": {
                 "reveal": "always",

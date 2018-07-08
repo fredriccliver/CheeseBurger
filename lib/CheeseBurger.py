@@ -9,12 +9,11 @@ class Classifier:
     feature_level_dict = {}
     recipe = []     # recipe[feature_index][level_index][class_index]
     weight_matrix = []
-    meta = {}
+
 
     def meta_load(self, path:str):
         f = open(path, 'r')
         meta = eval(f.read())
-        self.meta = meta
         f.close()
 
         self.features = meta['features'] 
@@ -24,10 +23,10 @@ class Classifier:
         self.weight_matrix = meta['weight_matrix']
 
         print("CHEESEBURGER : loaded meta file.")
+        print(str(meta))
         return
 
     def meta_save(self, path:str):
-        meta = self.meta
         meta = {}
         meta['features'] = self.features
         meta['class_names'] = self.class_names
@@ -43,6 +42,7 @@ class Classifier:
         f.close()
         
         print("CHEESEBURGER : saved meta file.")
+        print(data)
         return 
     
 
@@ -87,12 +87,19 @@ class Classifier:
         
         burger_matrix = []
         for i in range(0,len(row)):
+            try:
+                index = self.feature_level_dict[self.features[i]].index(row[i])
+                
+                burger_matrix.append(self.recipe[i][index])
+                pass
+            except :
+                burger_matrix.append([0]*len(self.class_names))
+                pass
             
-            index = self.feature_level_dict[self.features[i]].index(row[i])
-            burger_matrix.append(self.recipe[i][index])
         
         probability_arr = []
         for i in range(0, len(self.class_names)):
+            
             probability_arr.append(
                 np.matmul(
                     np.transpose(self.weight_matrix).tolist()[i],
