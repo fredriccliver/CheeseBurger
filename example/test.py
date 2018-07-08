@@ -32,17 +32,29 @@ model.meta_save("./data/meta.cbmeta")
 
 
 
-predictions = []
 
-for i in range(0, test.shape[0]):
-    predictions.append(model.probability_to_class(model.predict_row(test.loc[i,features].values.tolist())))
 
-print(predictions)
+# predictions = []
 
-submission = pd.read_csv("./data/gender_submission.csv", index_col="PassengerId")
-submission["Survived"] = predictions
+# for i in range(0, test.shape[0]):
+#     predictions.append(model.probability_to_class(model.predict_row(test.loc[i,features].values.tolist())))
 
-submission.to_csv("./data/result_cheeseburger.csv")
+# print(predictions)
+
+# submission = pd.read_csv("./data/gender_submission.csv", index_col="PassengerId")
+# submission["Survived"] = predictions
+
+# submission.to_csv("./data/result_cheeseburger.csv")
+
+
+
+
+
+
+print(model.predict_row(['female', 1, 'C', 2, 0, 0], debug=True))
+
+
+
 
 
 # {

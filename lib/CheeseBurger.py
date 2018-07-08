@@ -83,19 +83,31 @@ class Classifier:
         return
 
 
-    def predict_row(self, row: list, mode=0)->list:
+    def predict_row(self, row: list, debug=False)->list:
         
         burger_matrix = []
         for i in range(0,len(row)):
             try:
                 index = self.feature_level_dict[self.features[i]].index(row[i])
                 
-                burger_matrix.append(self.recipe[i][index])
+                
+                
+                burger_matrix.append(
+                    #self.recipe[i][index] / sum(self.recipe[i][index])
+                    (np.array(self.recipe[i][index]) / sum(self.recipe[i][index])).tolist()
+                )
                 pass
             except :
                 burger_matrix.append([0]*len(self.class_names))
                 pass
-            
+        
+        if(debug == True): 
+            print("burger_matrix :")
+            print(burger_matrix)
+        
+        if(debug == True):
+            print("weight_matrix :")
+            print(self.weight_matrix)
         
         probability_arr = []
         for i in range(0, len(self.class_names)):
