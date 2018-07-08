@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531e120e-cbb7-4f8c-a49b-a7bc88e518a4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/exercise/plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CheeseBurgerProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CheeseBurgerProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise/custom_entropy.py" beforeDir="false" afterPath="$PROJECT_DIR$/exercise/custom_entropy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise/entropy_advanced.py" beforeDir="false" afterPath="$PROJECT_DIR$/exercise/entropy_advanced.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise/scientific_mode_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/exercise/scientific_mode_test.py" afterDir="false" />
-    </list>
+    <list default="true" id="531e120e-cbb7-4f8c-a49b-a7bc88e518a4" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,11 +13,11 @@
     <SUITE FILE_PATH="coverage/CheeseBurgerProject$plot.coverage" NAME="plot Coverage Results" MODIFIED="1530863687426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exercise" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="entropy_advanced.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/exercise/entropy_advanced.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1013">
+            <state relative-caret-position="571">
               <caret line="160" column="18" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -59,11 +49,11 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="107" />
-    <option name="y" value="90" />
-    <option name="width" value="1842" />
-    <option name="height" value="1224" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="63" />
+    <option name="y" value="72" />
+    <option name="width" value="1405" />
+    <option name="height" value="723" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -149,29 +139,28 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="107" y="90" width="1842" height="1224" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1280" height="722" extended-state="6" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2852174" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.31506848" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2852174" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6304348" visible="true" weight="0.22312704" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.62808645" visible="true" weight="0.215625" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="0" />
       <window_info anchor="right" id="SciView" order="1" weight="0.32953313" />
-      <window_info id="Structure" order="2" sideWeight="0.36956522" side_tool="true" visible="true" weight="0.22312704" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.29863015" />
+      <window_info id="Structure" order="2" sideWeight="0.37191358" side_tool="true" visible="true" weight="0.215625" />
       <window_info id="Favorites" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.29863015" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32968035" />
     </layout>
   </component>
@@ -182,6 +171,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/exercise/entropy_advanced.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2400">
+          <caret line="160" column="18" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/exercise/scientific_mode_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -189,19 +188,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exercise/plot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/exercise/plot.py" />
     <entry file="file://$PROJECT_DIR$/exercise/entropy_advanced.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1013">
+        <state relative-caret-position="571">
           <caret line="160" column="18" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />

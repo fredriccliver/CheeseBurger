@@ -1,26 +1,110 @@
 # Custom Machine Learing Class.
 # 2018.06.27
-
+import numpy as np
 import pandas
 
 class Classifier:
+    features = []
+    class_names = []
+    feature_level_dict = {}
+    recipe = []     # recipe[feature_index][level_index][class_index]
+    weight_matrix = []
+    meta = {}
 
+    def meta_load(self, path:str):
+        f = open(path, 'r')
+        meta = eval(f.read())
+        self.meta = meta
+        f.close()
 
-    fwVector = [ 1,2,3 ]
+        self.features = meta['features'] 
+        self.class_names = meta['class_names']
+        self.feature_level_dict = meta['feature_level_dict']
+        self.recipe = meta['recipe']
+        self.weight_matrix = meta['weight_matrix']
 
-    burgerMatrix = [
-        [],[],[]
-    ]
-
-    recipe = [
-        [],[],[]
-    ]
-
-    # x : row x feature matrix
-    # t : row x label matrix
-    def fit(self, x, y):
+        print("CHEESEBURGER : loaded meta file.")
         return
 
+    def meta_save(self, path:str):
+        meta = self.meta
+        meta = {}
+        meta['features'] = self.features
+        meta['class_names'] = self.class_names
+        meta['feature_level_dict'] = self.feature_level_dict
+        meta['recipe'] = self.recipe
+        meta['weight_matrix'] = self.weight_matrix
+        
+
+        
+        f = open(path, 'w')
+        data = str(meta)
+        f.write(data)
+        f.close()
+        
+        print("CHEESEBURGER : saved meta file.")
+        return 
+    
+
+    def fit(self, data:pandas.DataFrame, features:list, label_col_name:str):
+        self.features = features
+        self.class_names = list(data[[label_col_name]].groupby(label_col_name).size().keys())
+
+        # feature level dict 추출.
+        for feature in features:
+            levels = list(data[[feature]].groupby(feature).size().keys())
+            self.feature_level_dict[feature] = levels
+
+        # point matrix 계산.
+        for feature in features:
+
+            by_level_arr = []
+            for level in self.feature_level_dict[feature]:
+                
+                by_class_arr = []
+                for class_name in self.class_names:
+                    cnt = len(data[(data[feature] == level) & (data[label_col_name] == class_name)])
+                    by_class_arr.append(cnt)
+                
+                by_level_arr.append(by_class_arr)
+
+            self.recipe.append(by_level_arr)
+
+        # weight matrix 계산
+        for i in range(0, len(self.recipe)):
+            arr = np.transpose(self.recipe[i])
+            
+            weight_arr = []
+            for i in range(0, len(self.class_names)):
+                
+                weight_arr.append(Appetizer.cal_weight(self,arr[i]).tolist())
+                
+            self.weight_matrix.append(weight_arr)
+        return
+
+
+    def predict_row(self, row: list, mode=0)->list:
+        
+        burger_matrix = []
+        for i in range(0,len(row)):
+            
+            index = self.feature_level_dict[self.features[i]].index(row[i])
+            burger_matrix.append(self.recipe[i][index])
+        
+        probability_arr = []
+        for i in range(0, len(self.class_names)):
+            probability_arr.append(
+                np.matmul(
+                    np.transpose(self.weight_matrix).tolist()[i],
+                    np.transpose(burger_matrix)[i]
+                )
+            )
+
+        
+        return probability_arr
+    
+    def probability_to_class(self, prob:list):
+        return self.class_names[prob.index(max(prob))]
 
     def predictClass(self, arr):
         predictedClass = np.argmax(arr)
@@ -34,18 +118,6 @@ class Classifier:
 
 
 
-    # data frame 을 받아서 모델을 생성.
-    # 모델의 구체적인 형태는? data frame? matrix?
-    def learn(self):
-        return
-
-
-    def calculateVariance(self):
-        # 각 feature 별 Variance 를 array 로 return.
-        # varVec[0.34, 0.33, 0.56]
-        # element 객수는
-        return
-
     # 추후에는 weight 를 feature, class 마다 따로 구해야 하지 않은지.
     # multi class classification 에서는 return 을 [ class1 weight, class2 weight, ...]
     # 클래스마다 중요한 feture 가 다를 수 있음.
@@ -57,7 +129,7 @@ class Classifier:
             feature_col_name: str
         '''
         class_names = list(train_data[[label_col_name]].groupby(label_col_name).size().keys())
-        levels = list(train_data[[feature_col_name]].groupby(feature_col_name).size().keys())
+        # levels = list(train_data[[feature_col_name]].groupby(feature_col_name).size().keys())
         
         divided_col_by_classes = []
         
@@ -99,7 +171,7 @@ class Classifier:
             feature_col_name: str
         '''
         class_names = list(train_data[[label_col_name]].groupby(label_col_name).size().keys())
-        levels = list(train_data[[feature_col_name]].groupby(feature_col_name).size().keys())
+        # levels = list(train_data[[feature_col_name]].groupby(feature_col_name).size().keys())
         
         divided_col_by_classes = []
         
@@ -144,31 +216,12 @@ class Classifier:
         else:
             return Classifier.get_feature_weight(self, train_data, label_col_name, feature_col_name)
 
-
+    
 
     # 행렬을 받아서 그 행렬에 모델을 적용하고, 정답 배열을 return.
     # return 되는 것도 행렬. [index, class] 로 return.
     def predict(self, disp={"class", "class-prob", "probabilities"}):
-
-        pointArray = np.matmul(self.fwVector,self.burgerMatrix)
-        # result = [ ,,, ] elements count : counts of classes.
-
-        probabiliityArray = [
-            pointArray[0] / np.sum(pointArray),
-            pointArray[1] / np.sum(pointArray),
-            pointArray[2] / np.sum(pointArray),
-            ...
-        ]
-
-        # bestProb = [ className, Probability ]
-        bestProb = [ 1,2,3]
-
-        if disp=="class":               return bestProb[0]
-        elif disp=="class-prob":        return bestProb
-        elif disp=="probabilities":     return probabiliityArray
-        else:                           return
-
-import numpy as np
+        return
 
 
 
@@ -288,6 +341,12 @@ class Appetizer:
             ent += (val / sum(data)) ** 2
         
         return ent #* len(data) #클래스별 합산 엔트로피 구할때 문제가 생겨서 len 곱하는 부분 제거함.
+
+    def cal_weight(self, data:list):
+        w = 0
+        for val in data:
+            w += (val / sum(data)) ** 2
+        return w
 
     levelingDictionary = []
 

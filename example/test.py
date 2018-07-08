@@ -1,40 +1,37 @@
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.dirname(__file__) +'/..'))
+
+import lib.CheeseBurger as cb
 import numpy as np
-from CheeseBurger import Classifier 
-#import CheeseBurger as cb
+import pandas as pd
 
-# dataRow 는 총 데이터 row 수.
-# 각 row 는 행렬. (class count) By (feature count) matrix
-# 아래 예제는 3 x 2 행렬. 분류되는 총 class 의 갯수가 3개 이며, 분석에 사용하는 feature 의 수는 2개.
+train = pd.read_csv("./data/train.csv")
+test = pd.read_csv("./data/test.csv")
 
-# arr_0 = dataRow[0]
-arr_0 = np.array(
-    [
-        [0.73, 0.55],
-        [0.55, 0.32],
-        [0.32, 0.77]
-    ]
-)
+model = cb.Classifier()
+features = ["Sex", "Pclass", "Embarked"]
+label = "Survived"
 
-wVec = np.array(
-    [1.33, 2]
-)
 
-# wApplied : 가중치가 적용된 class 별 feature 점수 배열
-wApplied = arr_0 * wVec
+# model.fit(train, features, label)
+# model.meta_save("./data/meta.cbmeta")
 
-classPointArr = []
-for row in wApplied:
-    # print(row) 
-    # [0.9709 1.1   ]
-    # [0.7315 0.64  ]
-    # [0.4256 1.54  ]
-    
-    #print(sum(row))
-    # 2.0709
-    # 1.3715000000000002
-    # 1.9656
+model.meta_load("./data/meta.cbmeta")
+print(model.meta)
 
-    classPointArr.append(sum(row))
+predictions = []
 
-print(cb.Classifier.predictClass(classPointArr))
+for i in range(0, test.shape[0]):
+    predictions.append(model.probability_to_class(model.predict_row(test.loc[i,features].values.tolist())))
+
+print(predictions)
+
+submission = pd.read_csv("./data/gender_submission.csv", index_col="PassengerId")
+submission["Survived"] = predictions
+
+submission.to_csv("./data/result_cheeseburger.csv")
+
+
+
 
