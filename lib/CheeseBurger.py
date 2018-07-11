@@ -9,6 +9,7 @@ class Classifier:
     feature_level_dict = {}
     recipe = []     # recipe[feature_index][level_index][class_index]
     weight_matrix = []
+    train_count = []
 
 
     def meta_load(self, path:str):
@@ -16,11 +17,13 @@ class Classifier:
         meta = eval(f.read())
         f.close()
 
+        self.train_count = meta['train_count']
         self.features = meta['features'] 
         self.class_names = meta['class_names']
         self.feature_level_dict = meta['feature_level_dict']
         self.recipe = meta['recipe']
         self.weight_matrix = meta['weight_matrix']
+        self.train_count = meta['train_count']
 
         print("CHEESEBURGER : loaded meta file.")
         print(str(meta))
@@ -28,13 +31,12 @@ class Classifier:
 
     def meta_save(self, path:str):
         meta = {}
+        
         meta['features'] = self.features
         meta['class_names'] = self.class_names
         meta['feature_level_dict'] = self.feature_level_dict
         meta['recipe'] = self.recipe
         meta['weight_matrix'] = self.weight_matrix
-        
-
         
         f = open(path, 'w')
         data = str(meta)
@@ -49,6 +51,7 @@ class Classifier:
     def fit(self, data:pandas.DataFrame, features:list, label_col_name:str):
         self.features = features
         self.class_names = list(data[[label_col_name]].groupby(label_col_name).size().keys())
+        self.train_count = data.shape[0]
 
         # feature level dict 추출.
         for feature in features:
