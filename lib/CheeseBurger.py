@@ -81,7 +81,16 @@ class Classifier:
             for i in range(0, len(self.class_names)):
                 
                 weight_arr.append(Appetizer.cal_weight(self,arr[i]).tolist())
-                
+            
+            print("---")
+            mean = np.mean(weight_arr)
+            print(np.mean(weight_arr))
+            arr = []
+            for i in range(0, len(self.class_names)):
+                arr.append(mean)
+            weight_arr = arr
+
+
             self.weight_matrix.append(weight_arr)
         return
 
@@ -119,6 +128,7 @@ class Classifier:
                 np.matmul(
                     np.transpose(self.weight_matrix).tolist()[i],
                     np.transpose(burger_matrix)[i]
+                    
                 )
             )
 
