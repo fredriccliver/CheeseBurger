@@ -1,0 +1,18 @@
+[distutils]
+ 
+index-servers=pypi
+ 
+
+
+[pypitest]
+ 
+repository = https://testpypi.python.org/pypi
+ 
+username = fredriccliver
+
+ 
+[pypi]
+ 
+repository = https://pypi.python.org/pypi
+ 
+username = fredriccliver

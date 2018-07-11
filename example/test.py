@@ -31,7 +31,7 @@ label = "Survived"
 model.fit(train, features, label)
 model.meta_save("./data/meta.cbmeta")
 
-#model.meta_load("./data/meta.cbmeta")
+# model.meta_load("./data/meta.cbmeta")
 
 
 
@@ -57,6 +57,7 @@ submission.to_csv("./data/result_cheeseburger.csv")
 #print(model.predict_row(['female', 1, 'C', 2, 0, 0], debug=True))
 
 
+<<<<<<< HEAD
 
 
 
@@ -126,3 +127,5 @@ submission.to_csv("./data/result_cheeseburger.csv")
 #         [0.5589928367855448, 0.48594439314660925]
 #     ]
 # }
+=======
+>>>>>>> 9c1157efb4b6399c1507e5604525848e5164f9d4

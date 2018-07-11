@@ -1,1 +1,1 @@
-from . import CheeseBurger
+name = "CheeseBurger"
