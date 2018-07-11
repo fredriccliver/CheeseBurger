@@ -6,8 +6,8 @@ import lib.CheeseBurger as cb
 import numpy as np
 import pandas as pd
 
-train = pd.read_csv("./data/train.csv")
-test = pd.read_csv("./data/test.csv")
+train = pd.read_csv("./data/train-sep-for-learn.csv")
+test = pd.read_csv("./data/train-sep-for-test.csv")
 
 model = cb.Classifier()
 
@@ -34,12 +34,12 @@ model.meta_save("./data/meta.cbmeta")
 
 
 
-# predictions = []
+predictions = []
 
-# for i in range(0, test.shape[0]):
-#     predictions.append(model.probability_to_class(model.predict_row(test.loc[i,features].values.tolist())))
+for i in range(0, test.shape[0]):
+    predictions.append(model.probability_to_class(model.predict_row(test.loc[i,features].values.tolist())))
 
-# print(predictions)
+print(predictions)
 
 # submission = pd.read_csv("./data/gender_submission.csv", index_col="PassengerId")
 # submission["Survived"] = predictions

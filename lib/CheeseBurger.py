@@ -23,7 +23,6 @@ class Classifier:
         self.feature_level_dict = meta['feature_level_dict']
         self.recipe = meta['recipe']
         self.weight_matrix = meta['weight_matrix']
-        self.train_count = meta['train_count']
 
         print("CHEESEBURGER : loaded meta file.")
         print(str(meta))
@@ -32,6 +31,7 @@ class Classifier:
     def meta_save(self, path:str):
         meta = {}
         
+        meta['train_count'] = self.train_count
         meta['features'] = self.features
         meta['class_names'] = self.class_names
         meta['feature_level_dict'] = self.feature_level_dict
