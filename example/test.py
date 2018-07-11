@@ -28,8 +28,8 @@ features = ["Sex", "Pclass", "Embarked", "Parch", "SibSp"]
 label = "Survived"
 
 
-model.fit(train, features, label)
-model.meta_save("./data/meta.cbmeta")
+# model.fit(train, features, label)
+# model.meta_save("./data/meta.cbmeta")
 
 # model.meta_load("./data/meta.cbmeta")
 
