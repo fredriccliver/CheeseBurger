@@ -6,8 +6,8 @@ import lib.CheeseBurger as cb
 import numpy as np
 import pandas as pd
 
-train = pd.read_csv("./data/train-sep-for-learn.csv")
-test = pd.read_csv("./data/train-sep-for-test.csv")
+train = pd.read_csv("./data/train.csv")
+test = pd.read_csv("./data/test.csv")
 
 model = cb.Classifier()
 
@@ -24,12 +24,13 @@ test['GenerationsBy10'] = np.floor(test['Age']/10)
 train['FamilySize'] = train['Parch'] + train['SibSp']
 test['FamilySize'] = test['Parch'] + test['SibSp']
 
-features = ["Sex", "Pclass", "Embarked", "Parch", "SibSp"]
+
+features = ["Sex", "Pclass", "Embarked", "Parch", "SibSp", "FamilySize"]
 label = "Survived"
 
 
-# model.fit(train, features, label)
-# model.meta_save("./data/meta.cbmeta")
+model.fit(train, features, label)
+model.meta_save("./data/meta.cbmeta")
 
 # model.meta_load("./data/meta.cbmeta")
 
@@ -37,17 +38,17 @@ label = "Survived"
 
 
 
-# predictions = []
+predictions = []
 
-# for i in range(0, test.shape[0]):
-#     predictions.append(model.probability_to_class(model.predict_row(test.loc[i,features].values.tolist())))
+for i in range(0, test.shape[0]):
+    predictions.append(model.probability_to_class(model.predict_row(test.loc[i,features].values.tolist())))
 
-# print(predictions)
+print(predictions)
 
-# submission = pd.read_csv("./data/gender_submission.csv", index_col="PassengerId")
-# submission["Survived"] = predictions
+submission = pd.read_csv("./data/gender_submission.csv", index_col="PassengerId")
+submission["Survived"] = predictions
 
-# submission.to_csv("./data/result_cheeseburger.csv")
+submission.to_csv("./data/result_cheeseburger.csv")
 
 
 
