@@ -246,3 +246,4 @@ $RECYCLE.BIN/
 .vs/slnx.sqlite
 data/meta.cbmeta
 
+.vscode/settings.json
