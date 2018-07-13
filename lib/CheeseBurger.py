@@ -255,11 +255,55 @@ class Classifier:
     def predict(self, disp={"class", "class-prob", "probabilities"}):
         return
 
-    def getPredictions(self, data:pandas.DataFrame) -> list:
+    '''
+    mode : 
+        0 : 예측한 class 배열 출력.
+        1 : [예측한 class, 정확도] 배열 출력.
+        2 : 원본 point 배열 출력
+    '''
+    def getPredictions(self, data:pandas.DataFrame, mode = 0) -> list:
+        
         predictions = []
         for i in range(0, data.shape[0]):
-            predictions.append(self.Classifier.probability_to_class(self.Classifier.predict_row(self, data.loc[i,self.Classifier.features].values.tolist())))
+            if(mode == 0):
+                predictions.append(Classifier.probability_to_class(self, Classifier.predict_row(self, data.loc[i, self.features].values.tolist())))
+                pass
+            elif(mode == 1):
+                point_arr = Classifier.predict_row(self, data.loc[i, self.features].values.tolist())
+                class_and_accuracy = {}
+
+                class_and_accuracy["Class"] = Classifier.probability_to_class(self, point_arr) 
+                class_and_accuracy["Accuracy"] = max(point_arr) / sum(point_arr) 
+                predictions.append(class_and_accuracy)
+                pass
+            elif(mode == 2):
+                predictions.append( Classifier.predict_row(self, data.loc[i, self.features].values.tolist()) )
+                pass
+            else:
+                return ["Invalid mode"]
+        
         return predictions
+
+    
+    def accuracy(self, data:pandas.DataFrame, label_col_name:str) -> float:
+        predictions = self.getPredictions(data)
+        
+        real_vals = data[label_col_name].tolist()
+        
+
+        if(len(predictions) != len(real_vals)):
+            print(len(predictions))
+            print(real_vals)
+            print("the length is different with predictions and label list, while calculating accuracy")
+            return 0
+ 
+        correct_cnt = 0
+        for i in range(0, len(predictions)):
+            if(predictions[i] == real_vals[i]) : 
+                correct_cnt += 1
+        
+        return "%.5f" % (correct_cnt / len(predictions))
+
 
 class Appetizer:
 

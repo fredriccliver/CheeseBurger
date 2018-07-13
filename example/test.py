@@ -6,8 +6,8 @@ import lib.CheeseBurger as cb
 import numpy as np
 import pandas as pd
 
-train = pd.read_csv("./data/splited_train_for_fit.csv")
-test = pd.read_csv("./data/splited_train_for_test.csv")
+train = pd.read_csv("./data/leaf-classification/train.csv")
+test = pd.read_csv("./data/leaf-classification/test.csv")
 
 model = cb.Classifier()
 
@@ -18,19 +18,14 @@ train.fillna(0, inplace=True)
 test.fillna(0, inplace=True)
 
 # 새 feature 만들기
-train['GenerationsBy10'] = np.floor(train['Age']/10)
-test['GenerationsBy10'] = np.floor(test['Age']/10)
-train['FamilySize'] = train['Parch'] + train['SibSp']
-test['FamilySize'] = test['Parch'] + test['SibSp']
-
-train['Fare_grade'] = np.floor(test['Fare']/100)
-test['Fare_grade'] = np.floor(test['Fare']/100)
+##
 
 # 학습, 예측할 feature
-features = ["Sex", "Pclass", "Embarked", "Parch", "SibSp", "Fare_grade"]
+
+features = train.columns.values[2:]
 
 # 학습에 사용할 label
-label = "Survived"
+label = "species"
 
 
 model.fit(train, features, label)
@@ -40,15 +35,22 @@ model.meta_save("./data/meta.cbmeta")
 
 
 
-predictions = cb.Classifier.getPredictions(cb, test)
+# predictions = model.getPredictions(test, mode=1)
 
 
+
+predictions = model.getPredictions(test, mode=0)
 print(predictions)
 
-# submission = pd.read_csv("./data/gender_submission.csv", index_col="PassengerId")
-# submission["Survived"] = predictions
 
-# submission.to_csv("./data/result_cheeseburger.csv")
+print(model.accuracy(train, label))
+
+
+
+submission = pd.read_csv("./data/leaf-classification/gender_submission.csv", index_col="PassengerId")
+submission["Survived"] = predictions
+
+submission.to_csv("./data/leaf-classification/result_cheeseburger.csv")
 
 
 
