@@ -1,4 +1,0 @@
-{
-    "python.pythonPath": "/usr/local/opt/python/bin/python3.6",
-    "python.autoComplete.preloadModules": ["numpy", "pandas", "matplotlib"]
-}
