@@ -215,10 +215,6 @@ venv.bak/
 
 ### VisualStudioCode ###
 .vscode/*
-# !.vscode/settings.json
-# .vscode/tasks.json
-# !.vscode/launch.json
-# !.vscode/extensions.json
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -247,6 +243,6 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/macos,python,windows,intellij,jupyternotebook,visualstudiocode
-.vscode/settings.json
 .vs/slnx.sqlite
 data/meta.cbmeta
+

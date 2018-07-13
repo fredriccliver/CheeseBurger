@@ -43,13 +43,7 @@ model.meta_save("./data/meta.cbmeta")
 predictions = []
 
 for i in range(0, test.shape[0]):
-    predictions.append(
-        model.probability_to_class(
-            model.predict_row(
-                test.loc[i,features].values.tolist()
-            )
-        )
-    )
+    predictions.append(model.probability_to_class(model.predict_row(test.loc[i,features].values.tolist())))
 
 print(predictions)
 
