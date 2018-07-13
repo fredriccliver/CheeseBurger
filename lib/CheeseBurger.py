@@ -255,7 +255,11 @@ class Classifier:
     def predict(self, disp={"class", "class-prob", "probabilities"}):
         return
 
-
+    def getPredictions(self, data:pandas.DataFrame) -> list:
+        predictions = []
+        for i in range(0, data.shape[0]):
+            predictions.append(self.Classifier.probability_to_class(self.Classifier.predict_row(self, data.loc[i,self.Classifier.features].values.tolist())))
+        return predictions
 
 class Appetizer:
 
