@@ -83,7 +83,7 @@ class Classifier:
                 weight_arr.append(Appetizer.cal_weight(self,arr[i]).tolist())
             
             #print("---")
-            mean = np.mean(weight_arr) # class x feature 별로 따로 weight 를 메기니 classification 이 너무 한 쪽으로 치우쳐서 평균 값 하나만 쓰도록 함. 
+            mean = np.mean(weight_arr) # class x feature 별로 따로 weight 를 메기니 classification 이 너무 한 쪽으로 치우쳐서 평균 값 하나만 쓰도록 함.
             #print(np.mean(weight_arr))
             arr = []
             for i in range(0, len(self.class_names)):

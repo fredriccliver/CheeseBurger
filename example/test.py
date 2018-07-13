@@ -11,30 +11,32 @@ test = pd.read_csv("./data/splited_train_for_test.csv")
 
 model = cb.Classifier()
 
-
 # #PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
 
-
+# 채우기
 train.fillna(0, inplace=True)
 test.fillna(0, inplace=True)
 
+# 새 feature 만들기
 train['GenerationsBy10'] = np.floor(train['Age']/10)
 test['GenerationsBy10'] = np.floor(test['Age']/10)
-
 train['FamilySize'] = train['Parch'] + train['SibSp']
 test['FamilySize'] = test['Parch'] + test['SibSp']
 
+train['Fare_grade'] = np.floor(test['Fare']/100)
+test['Fare_grade'] = np.floor(test['Fare']/100)
 
-features = ["Sex", "Pclass", "Embarked", "Parch", "SibSp", "FamilySize"]
+# 학습, 예측할 feature
+features = ["Sex", "Pclass", "Embarked", "Parch", "SibSp", "Fare_grade"]
+
+# 학습에 사용할 label
 label = "Survived"
 
 
 model.fit(train, features, label)
 model.meta_save("./data/meta.cbmeta")
 
-# model.meta_load("./data/meta.cbmeta")
-
-
+#model.meta_load("./data/meta.cbmeta")
 
 
 
@@ -53,6 +55,6 @@ print(predictions)
 
 
 
-#print(model.predict_row(['female', 1, 'C', 2, 0, 0], debug=True))
+# print(model.predict_row(['female', 1, 'C', 2, 0], debug=True))
 
 
