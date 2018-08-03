@@ -3,6 +3,8 @@
 Start : 28 Jun, 2018
 
 ## Main point of Algorithm.
+- It is easy to learn algorithm while learning machine learning.
+- I want to provide the easiest way to try making Machine Learning Algorithm.
 - Need to develop the regression
 - Making prototype of classifier is done.
 - It deals all feature as categorical, not continuos.
@@ -28,3 +30,7 @@ See the practice file, know the using CheeseBurger Library simply.
 
 And compare with 'decision Tree' algorithm.
 > /example/titanic-decision-tree.py
+
+---
+
+fredriccliver@gmail.com
