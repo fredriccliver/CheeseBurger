@@ -1,7 +1,7 @@
 import pandas as pd
 
-train = pd.read_csv("./data/train.csv", index_col="PassengerId")
-test = pd.read_csv("./data/test.csv", index_col="PassengerId")
+train = pd.read_csv("./data/titanic/train.csv", index_col="PassengerId")
+test = pd.read_csv("./data/titanic/test.csv", index_col="PassengerId")
 
 # preprocessing
 
@@ -41,7 +41,9 @@ predictions = model.fit(X_train, y_train).predict(X_test)
 
 print (predictions)
 
-submission = pd.read_csv("./data/gender_submission.csv", index_col="PassengerId")
+submission = pd.read_csv("./data/titanic/gender_submission.csv", index_col="PassengerId")
 submission["Survived"] = predictions
 
-submission.to_csv("./data/result_decisiontree.csv")
+submission.to_csv("./data/titanic/result_decisiontree.csv")
+
+# the accuray is 0.77990 (above 77%)
