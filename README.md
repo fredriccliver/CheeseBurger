@@ -23,8 +23,8 @@ Start : 28 Jun, 2018
 
 ## How to use this
 
-See the practice file.
+See the practice file, know the using CheeseBurger Library simply.
 > /example/titanic-cheeseburger.py
 
-And compare Decision Tree model.
+And compare with 'decision Tree' algorithm.
 > /example/titanic-decision-tree.py
