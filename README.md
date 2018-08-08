@@ -26,10 +26,10 @@ Start : 28 Jun, 2018
 ## How to use this
 
 See the practice file, know the using CheeseBurger Library simply.
-> /example/titanic-cheeseburger.py
+> /example/titanic-cheeseburger.py # the accuracy is 0.72952 (above 72%)
 
 And compare with 'decision Tree' algorithm.
-> /example/titanic-decision-tree.py
+> /example/titanic-decision-tree.py # the accuray is 0.77990 (above 77%)
 
 ---
 
