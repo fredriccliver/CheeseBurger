@@ -6,6 +6,7 @@ import numpy as np
 import pandas
 
 class Classifier:
+    
     features = []
     class_names = []
     feature_level_dict = {}
@@ -54,6 +55,7 @@ class Classifier:
         self.features = features
         self.class_names = list(data[[label_col_name]].groupby(label_col_name).size().keys())
         self.train_count = data.shape[0]
+        self.weight_matrix = []
 
         # making feature level(each value's step) dictionary
         for feature in features:
@@ -127,10 +129,9 @@ class Classifier:
                 np.matmul(
                     np.transpose(self.weight_matrix).tolist()[i],
                     np.transpose(burger_matrix)[i]
-                    
                 )
             )
-
+        
         
         return probability_arr
     
@@ -221,7 +222,8 @@ class Classifier:
             pass
 
         predictions = []
-        for i in range(0, data.shape[0]):
+        # for i in range(0, data.shape[0]):
+        for i in data.index.values:
             if(mode == 0):
                 # return the array of classes
                 predictions.append(Classifier.probability_to_class(self, Classifier.predict_row(self, data.loc[i, self.features].values.tolist())))
